@@ -1,11 +1,7 @@
 /*
 ** Types and resources
 */
-typedef int EGLBoolean;
-typedef long EGLint;
-typedef void *EGLDisplay;
-typedef void *EGLConfig;
-typedef void *EGLSurface;
+
 typedef void *EGLContext;
 typedef void *NativeDisplayType;
 typedef void *NativeWindowType;
