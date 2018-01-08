@@ -25,6 +25,7 @@ void *ps4KernelFindClosestPageStart(uint64_t addr)
 void *ps4KernelSeekElfAddress()
 {
 	static char *addr = NULL;
+	if(addr != NULL) return addr;
 	
 	char *m;
 	int i;
@@ -59,14 +60,20 @@ void *ps4KernelSeekElfAddress()
 		m = PS4_KERNEL_ELF_FIXED_ADDRESS;
 		for(i = 0; i < magicSize && m[i] == elfMagic[i]; ++i);
 			if(i == magicSize)
+			{
+				addr = m;
 				return m;
+			}
 			for(m = PS4_KERNEL_ELF_RANGE_ADDRESS;
 				m < PS4_KERNEL_ELF_RANGE_ADDRESS + PS4_KERNEL_ELF_RANGE_SIZE;
 				m += PS4_KERNEL_ELF_PAGE_SIZE)
 			{
 				for(i = 0; i < magicSize && m[i] == elfMagic[i]; ++i);
 				if(i == magicSize)
+				{
+					addr = m;
 					return m;
+				}
 			}
 
 		return NULL;
