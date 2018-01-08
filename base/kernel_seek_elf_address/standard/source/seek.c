@@ -14,11 +14,11 @@ void *ps4KernelFindClosestPageStart(uint64_t addr)
 	int remainder = addr % 0x4000;
 	if(remainder == 0)
 	{
-		return addr;
+		return (void *)addr;
 	}
 	else
 	{
-		return addr + 0x4000 - remainder;
+		return (void *)(addr + 0x4000 - remainder);
 	}
 }
 
