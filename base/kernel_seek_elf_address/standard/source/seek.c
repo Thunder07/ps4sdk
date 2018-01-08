@@ -27,56 +27,34 @@ void *ps4KernelSeekElfAddress()
 	static char *addr = NULL;
 	if(addr != NULL) return addr;
 	
-	char *m;
-	int i;
 	unsigned char elfMagic[] = {0x7f, 'E', 'L', 'F', 0x02, 0x01, 0x01, 0x09, 0x00};
 	const size_t magicSize = sizeof(elfMagic) / sizeof(*elfMagic);
 	
-	if(sdkVersion>0x01760001)
+	uint64_t rip;
 	{
-		uint64_t rip;
-		{
-			unsigned long __edx;
-			unsigned long __eax;
-			__asm__ ("rdmsr" : "=d"(__edx), "=a"(__eax) : "c"(0xC0000082));
-			rip = (((uint64_t)__edx) << 32) | (uint64_t)__eax;
-		}
-	
-		char *startaddr = ps4KernelFindClosestPageStart(rip);
-	
-		for(char *m = startaddr;m > startaddr - PS4_KERNEL_ELF_RANGE_SIZE;m -= PS4_KERNEL_ELF_PAGE_SIZE)
-		{
-			for(i = 0; i < magicSize && m[i] == elfMagic[i]; ++i);
-			if(i == magicSize)
-			{
-				addr = m;
-				return m;
-			}
-		}
-		return NULL;
+		unsigned long __edx;
+		unsigned long __eax;
+		__asm__ ("rdmsr" : "=d"(__edx), "=a"(__eax) : "c"(0xC0000082));
+		rip = (((uint64_t)__edx) << 32) | (uint64_t)__eax;
 	}
-	else
-	{
-		m = PS4_KERNEL_ELF_FIXED_ADDRESS;
-		for(i = 0; i < magicSize && m[i] == elfMagic[i]; ++i);
-			if(i == magicSize)
-			{
-				addr = m;
-				return m;
-			}
-			for(m = PS4_KERNEL_ELF_RANGE_ADDRESS;
-				m < PS4_KERNEL_ELF_RANGE_ADDRESS + PS4_KERNEL_ELF_RANGE_SIZE;
-				m += PS4_KERNEL_ELF_PAGE_SIZE)
-			{
-				for(i = 0; i < magicSize && m[i] == elfMagic[i]; ++i);
-				if(i == magicSize)
-				{
-					addr = m;
-					return m;
-				}
-			}
 
-		return NULL;
+	char *startaddr = ps4KernelFindClosestPageStart(rip);
+
+	for(char *m = startaddr;m > startaddr - PS4_KERNEL_ELF_RANGE_SIZE;m -= PS4_KERNEL_ELF_PAGE_SIZE)
+	{
+		for(int i = 0; i < magicSize && m[i] == elfMagic[i]; ++i)
+		{
+			if(i == magicSize && m[i] == '\0' && elfMagic[i] == '\0')
+			{
+				addr = m;
+				return m;
+			}
+			else if(m[i] == '\0' ||  elfMagic[i] == '\0')
+			{
+				break;
+			}
+		}
 	}
+	return NULL;
 	
 }
