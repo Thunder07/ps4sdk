@@ -58,15 +58,20 @@ int ps4KernelStaticLookup(const char *name, void **value)
 
 	for (sym_t *p = table; p->name != NULL; ++p)
 	{
-		char *n = p->name;
+		const char *n = p->name;
 	
-		int j;
-		for(j = 0; n[j] == name[j] && n[j] != 0; ++j);
+		for(int j = 0; n[j] == name[j]; ++j)
+		{
 			if(j > 0 && n[j] == '\0' && name[j] == '\0')
 			{
 					*(uint64_t *)value = (uint64_t *)kernel_base + p->offset;
 					return PS4_OK;
 			}
+			else if(n[j] == '\0' || name[j] == '\0')
+			{
+				break;
+			}
+		}
 	}
 	return PS4_ERROR_KERNEL_SYMBOL_LOOKUP_NOT_FOUND;
 }
