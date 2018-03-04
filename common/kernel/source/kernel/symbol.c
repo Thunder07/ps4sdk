@@ -16,7 +16,7 @@ static struct mtx *ps4KernelSymbolLookUpMutex; // FIXME: Use RW lock or RM locks
 #define PS4_KERNEL_CACHE_SYMBOL_LOOKUP_CACHE PS4_KERNEL_CACHE_SYMBOL_LOOKUP ".cache"
 #define PS4_KERNEL_CACHE_SYMBOL_LOOKUP_MUTEX PS4_KERNEL_CACHE_SYMBOL_LOOKUP ".mutex"
 
-extern sdkVersion;
+extern uint32_t sdkVersion;
 
 int ps4KernelSymbolLookUp(const char *str, void **value)
 {
