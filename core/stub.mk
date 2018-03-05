@@ -29,7 +29,9 @@ $(eval $(call generateModule, libSceVideoOut, sceVideoOutOpen sceVideoOutClose s
 $(eval $(call generateModule, libSceGnmDriver, sceGnmFlushGarlic))
 $(eval $(call generateModule, libSceSystemService, sceSystemServiceHideSplashScreen))
 $(eval $(call generateModule, libSceSysCore, sceApplicationInitialize))
-
+$(eval $(call generateModule, libScePigletv2VSH, $(libScePigletv2VSH)))
+$(eval $(call generateModule, libSceOrbisCompat, $(libSceOrbisCompat)))
+$(eval $(call generateModule, libSceVideoCoreServerInterface, sceVideoCoreSetInitializeInfo))
 
 
 # no need to touch, generates non-module libs
