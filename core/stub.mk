@@ -30,6 +30,7 @@ $(eval $(call generateModule, libSceGnmDriver, sceGnmFlushGarlic))
 $(eval $(call generateModule, libSceSystemService, sceSystemServiceHideSplashScreen))
 $(eval $(call generateModule, libSceAudioOut, sceAudioOutInit sceAudioOutOpen sceAudioOutClose sceAudioOutOutput sceAudioOutSetVolume))
 $(eval $(call generateModule, libSceIme, sceImeKeyboardOpen sceImeKeyboardClose sceImeKeyboardUpdate sceImeKeyboardGetInfo sceImeKeyboardSetMode sceImeKeyboardGetResourceId sceImeUpdate sceImeOpen sceImeClose sceImeParamInit sceImeSetText))
+$(eval $(call generateModule, libSceSysCore, sceApplicationInitialize))
 
 
 
