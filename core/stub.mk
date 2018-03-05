@@ -31,7 +31,9 @@ $(eval $(call generateModule, libSceSystemService, sceSystemServiceHideSplashScr
 $(eval $(call generateModule, libSceAudioOut, sceAudioOutInit sceAudioOutOpen sceAudioOutClose sceAudioOutOutput sceAudioOutSetVolume))
 $(eval $(call generateModule, libSceIme, sceImeKeyboardOpen sceImeKeyboardClose sceImeKeyboardUpdate sceImeKeyboardGetInfo sceImeKeyboardSetMode sceImeKeyboardGetResourceId sceImeUpdate sceImeOpen sceImeClose sceImeParamInit sceImeSetText))
 $(eval $(call generateModule, libSceSysCore, sceApplicationInitialize))
-
+$(eval $(call generateModule, libScePigletv2VSH, $(libScePigletv2VSH)))
+$(eval $(call generateModule, libSceOrbisCompat, $(libSceOrbisCompat)))
+$(eval $(call generateModule, libSceVideoCoreServerInterface, sceVideoCoreSetInitializeInfo))
 
 
 # no need to touch, generates non-module libs
