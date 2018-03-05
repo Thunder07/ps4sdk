@@ -10,6 +10,7 @@ include $(CURDIR)/libcinternals.mk
 # all libkernel functions here
 include $(CURDIR)/libkernels405.mk
 include $(CURDIR)/libScePigletv2VSH.mk
+include $(CURDIR)/libSceOrbisCompat.mk
 
 # we externalize these three because of size and to generate adaptive libs
 $(eval $(call generateModule, libSceLibcInternal, $(libCInternals)))
