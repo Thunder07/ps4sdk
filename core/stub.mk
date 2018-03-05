@@ -28,6 +28,7 @@ $(eval $(call generateModule, libSceUserService, sceUserServiceInitialize sceUse
 $(eval $(call generateModule, libSceVideoOut, sceVideoOutOpen sceVideoOutClose sceVideoOutRegisterBuffers sceVideoOutUnregisterBuffers sceVideoOutSubmitFlip sceVideoOutSetBufferAttribute sceVideoOutSetFlipRate sceVideoOutAddFlipEvent sceVideoOutGetFlipStatus))
 $(eval $(call generateModule, libSceGnmDriver, sceGnmFlushGarlic))
 $(eval $(call generateModule, libSceSystemService, sceSystemServiceHideSplashScreen))
+$(eval $(call generateModule, libSceSysCore, sceApplicationInitialize))
 
 
 

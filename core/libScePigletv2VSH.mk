@@ -1,4 +1,5 @@
 libScePigletv2VSH := \
+scePigletSetConfigurationVSH \
 eglBindAPI \
 eglBindTexImage \
 eglChooseConfig \
