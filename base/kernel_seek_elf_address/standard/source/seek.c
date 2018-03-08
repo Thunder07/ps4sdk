@@ -44,7 +44,7 @@ void *ps4KernelSeekElfAddress()
 	{
 		for(int i = 0; i < magicSize && m[i] == elfMagic[i]; ++i)
 		{
-			if(i == magicSize && m[i] == '\0' && elfMagic[i] == '\0')
+			if(i == magicSize - 1 && m[i] == '\0' && elfMagic[i] == '\0')
 			{
 				addr = m;
 				return m;
